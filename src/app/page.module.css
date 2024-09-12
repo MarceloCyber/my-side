@@ -1,165 +1,193 @@
-.page {
-  --gray-rgb: 0, 0, 0;
-  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
-  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-
-  display: grid;
-  grid-template-rows: 20px 1fr 20px;
-  align-items: center;
-  justify-items: center;
-  min-height: 100svh;
-  padding: 80px;
-  gap: 64px;
-  font-family: var(--font-geist-sans);
+.container {
+  padding: 20px;
+  background-color: #222; /* Adiciona uma cor de fundo mais escura para contraste */
+  color: #ddd; /* Garante que o texto seja visível em um fundo escuro */
 }
 
-@media (prefers-color-scheme: dark) {
-  .page {
-    --gray-rgb: 255, 255, 255;
-    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
-    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
-
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-  }
-}
-
-.main {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  grid-row-start: 2;
-}
-
-.main ol {
-  font-family: var(--font-geist-mono);
-  padding-left: 0;
-  margin: 0;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  list-style-position: inside;
-}
-
-.main li:not(:last-of-type) {
-  margin-bottom: 8px;
-}
-
-.main code {
-  font-family: inherit;
-  background: var(--gray-alpha-100);
-  padding: 2px 4px;
-  border-radius: 4px;
-  font-weight: 600;
-}
-
-.ctas {
-  display: flex;
-  gap: 16px;
-}
-
-.ctas a {
-  appearance: none;
-  border-radius: 128px;
-  height: 48px;
-  padding: 0 20px;
-  border: none;
-  border: 1px solid transparent;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.searchBar {
+  margin-bottom: 20px;
+  padding: 10px;
   font-size: 16px;
-  line-height: 20px;
-  font-weight: 500;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #000; /* Garante que o texto da barra de pesquisa seja legível */
 }
 
-a.primary {
-  background: var(--foreground);
-  color: var(--background);
-  gap: 8px;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ajusta automaticamente o número de colunas com um mínimo de 250px */
+  gap: 20px;
 }
 
-a.secondary {
-  border-color: var(--gray-alpha-200);
-  min-width: 180px;
-}
-
-.footer {
-  grid-row-start: 3;
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px; /* Ajusta o padding para mais espaço interno */
+  text-align: center;
+  color: #ddd;
+  font-size: 14px; /* Ajusta o tamanho da fonte para legibilidade */
+  font-family: 'Times New Roman', Times, serif;
+  background-color: #171717;
   display: flex;
-  gap: 24px;
+  flex-direction: column; /* Permite que o conteúdo se ajuste verticalmente */
+  justify-content: space-between; /* Distribui o espaço entre os elementos do cartão */
+  max-width: 400px;
+  max-height: 600px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
 }
 
-.footer a {
+.card img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
+  margin-bottom: 3px; /* Espaço entre a imagem e o texto */
+}
+
+.card h3 {
+  margin: 5px 0;
+  font-size: 14px; /* Ajusta o tamanho do título para melhor legibilidade */
+}
+
+.card p {
+  margin: 0px 0; /* Adiciona espaço entre os parágrafos */
+}
+
+.card a {
+  margin-top: 10px;
+  display: inline-block;
+  padding: 8px 10px; /* Ajusta o padding para maior conforto */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #444; /* Adiciona um fundo mais claro para o link */
+}
+
+.card a:hover {
+  background-color: #e9e5e5; /* Altera a cor de fundo no hover para um efeito visual */
+}
+
+/* Adicione estas regras no seu arquivo CSS */
+
+.details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.show {
+  max-height: 1000px; /* Um valor suficientemente grande para garantir que o conteúdo seja visível */
+  opacity: 1;
+}
+
+.hide {
+  max-height: 0;
+  opacity: 0;
+}
+/* Estilos para a modal */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
+  z-index: 1000;
 }
 
-.footer img {
-  flex-shrink: 0;
+.modalContent {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 600px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  color: #000;
 }
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
-
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
-  }
-
-  .footer a:hover {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
+.modalImage {
+  max-width: 50%;
+  height: auto;
+  border-radius: 8px;
 }
 
-@media (max-width: 600px) {
-  .page {
-    padding: 32px;
-    padding-bottom: 80px;
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff0000;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 
-  .main {
-    align-items: center;
+  .card {
+    font-size: 12px;
+    padding: 10px;
   }
 
-  .main ol {
-    text-align: center;
+  .searchBar {
+    font-size: 14px; /* Ajusta o tamanho da fonte da barra de pesquisa */
+  }
+  .modalContent {
+    max-width: 80%;
+    padding: 15px;
   }
 
-  .ctas {
-    flex-direction: column;
+  .modalImage {
+    max-width: 100%;
   }
 
-  .ctas a {
+  .closeButton {
     font-size: 14px;
-    height: 40px;
-    padding: 0 16px;
+    padding: 4px 8px;
   }
 
-  a.secondary {
-    min-width: auto;
-  }
-
-  .footer {
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-  }
 }
 
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
+@media (max-width: 480px) {
+  .card {
+    font-size: 10px; /* Ajusta ainda mais o tamanho da fonte em dispositivos móveis */
+    padding: 8px; /* Reduz o padding em dispositivos móveis */
+  }
+
+  .searchBar {
+    font-size: 12px; /* Ajusta o tamanho da fonte da barra de pesquisa para dispositivos móveis */
+  }
+  .modalContent {
+    max-width: 80%;
+    max-height: 80%;
+    padding: 10px;
+    font-size: 9px;
+  }
+
+  .modalImage {
+    max-width: 30%;
+  }
+
+  .closeButton {
+    font-size: 10px;
+    padding: 3px 6px;
   }
 }
